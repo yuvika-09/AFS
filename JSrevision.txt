@@ -1,0 +1,28 @@
+HOISTING 
+-----------
+Hoisting is JavaScript’s default behavior in which all declarations move to the top during memory creation phase
+eg. console.log(a+10)   -> NaN
+    console.log(a)   -> undefined
+    var a = 10
+here, var a is declaration so it moves to the top but its initialization donot so it gives undefined nd nan 
+
+JS runs the code twice line by line 
+Global Execution Context -> 2 phases(memory creation, code execution)
+memory creation                 code execution
+var a = undefined               console.log(a+10) -> nan
+                                console.log(a)  -> undefined 
+
+Are let nd const variables hoisted?
+- yes, let nd const variables are also hoisted but they are not initialized during memory creation phase. 
+Its value is initialized during code execution phase.
+eg.
+clg(a);
+let a = 10;
+memory creation                 code execution
+let a = _________               console.log(a) -> error: cannot access before initialization
+
+let a;
+log(a) -> it gives undefined cz if we dont initialize it, js assigns it as undefined 
+
+let nd const dont get memory in memory creation phase bcz it gets special memory location in TDZ 
+it comes out of TDZ when it is accessed during code execution

@@ -1,0 +1,99 @@
+TYPESCRIPT
+
+LEC-1
+-------
+strongly typed - if it cannot be typecasted from big datatype to small datatype (small to big possible)
+
+static typed - java, typescript -> error detected at compile time
+
+loosely typed / weakly typed - if it can be typecasted from small to big nd vice versa
+
+dynamic typed - python, javascript -> error detected at runtime(disadv)
+
+
+download typescript - npm i -g typescript   [-g for global download]
+
+1. initialize typescript : npx tsc --init   -> Create a new tsconfig.json  
+2. .ts for file 
+3. run -> to run code, runtime env needed. there is no runtime env for typescript.
+            so first build ts code to js nd then node runs it.
+            i) tsc -b   -> builds  (build everytime after any changes)
+            ii) node js file (built)
+        if there will be any error, it will show while running build command nd it will not allow u to build, 
+        so never run ts code with node directly or it will ignore the ts nd run code normally as js code. 
+        so no benefit of writing ts
+
+
+
+tsconfig.json:
+- "target": "esnext"
+version of es(eg. es2016). write code in ts then specify here which version of es we want. it builds code in multiple versions
+
+-    "rootDir": "./src", 
+where written code of ts file
+
+- "outDir": "./dist",
+where to find js code of ts file
+
+
+
+LEC-2
+---------
+DIFFERENCE IN INTERFACE AND TYPE
+INTERFACE : 
+
+TYPE : 
+
+
+
+
+
+
+REACT
+---------
+
+To setup react project:
+vite
+1. npm create vite@latest
+2. project-name -> select React -> JavaScript -> no -> yes
+
+in app.jsx, delete all existing code, type rafce to create code template
+
+to run, go in project folder, nd type "npm run dev" in terminal and open the page on port 5173
+
+Features of React:
+- react offers component based structure
+    Components are small resuable piece of code 
+
+    + how to create a component?
+      there are 2 types of components :
+      1. functional components  -> to create it, use js functions which returns jsx code 
+      2. class components  -> to create it, use
+
+      every component should be used in App function otherwise it will not be seen on UI  -> <func_name></func_name>
+
+
+    + why component should start with capital letter?
+        so that component doesnot collide with html tags.
+        otherwise, it will be traeted as html tag cz all html tags start from small letter so to differentiate capital letter
+
+
+    + what is jsx?
+        jsx -> JS XML
+        jsx is a XML syntax which look like html and we can embed js expressions directly
+
+        jsx vs html 
+        1. in html, we use class attribute but in jsx className attribute 
+        2. in jsx, every tag must have closing tag but in html there are tags like img,br,input which donot have closing tags
+        3. in jsx, we can embed js expressions directly using {} but in html we have to use DOM manipulation
+
+
+    + how many types of export do we have?
+        2 types of export:
+        1. default export  -> one file can have only 1 deafult export, to export others use named export
+        2. named export  -> to export multiple things, use {} while import 
+
+
+    + what are props?
+        props are called properties and it is used to pass data from parent component to child component
+        
