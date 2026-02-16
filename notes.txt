@@ -62,7 +62,7 @@ in app.jsx, delete all existing code, type rafce to create code template
 to run, go in project folder, nd type "npm run dev" in terminal and open the page on port 5173
 
 Features of React:
-- react offers component based structure
+- react offers component based architecture
     Components are small resuable piece of code 
 
     + how to create a component?
@@ -96,4 +96,24 @@ Features of React:
 
     + what are props?
         props are called properties and it is used to pass data from parent component to child component
-        
+
+
+- Virtual DOM(Document Object Model)
+    2 DOMS exist - 
+    - Real DOM -> DOM tree 
+    - Virtual DOM -> lightweight copy of actual DOM
+    in React, Virtual DOM exist -> it doesnot refresh the whole tree, instead just reload only what is changed
+    Makes 2 virtual DOMS (prev and curr)
+
+    DIFFING ALGORITHM 
+    this algo finds the min no of changes to make in the current tree as compared to the prev state tree 
+    thats why never change the prev state directly otherwise react will not be able to interpret what to change
+
+    RECONCILIATION -> meaning?
+
+
+settimeout() nad setinterval() return id -> we dont want to show show id on page so store in useref
+useRef() return object with a single current property
+DIFFERENCE BETWEEN USESTATE AND USEREF
+                    USESTATE                                                                  USEREF 
+change in state variable trigger re-rendering of component           change in useref variable doesnot trigger re-rendering of component
