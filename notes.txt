@@ -117,3 +117,23 @@ useRef() return object with a single current property
 DIFFERENCE BETWEEN USESTATE AND USEREF
                     USESTATE                                                                  USEREF 
 change in state variable trigger re-rendering of component           change in useref variable doesnot trigger re-rendering of component
+
+
+
+LIFECYCLE PHASES IN REACT :
+1. MOUNTING - Component is created and inserted into DOM
+2. UPDATING - Component re-renders when state/props change
+3. UNMOUNTING - Component is removed from DOM
+
+lifecycle is handled using useEffect()
+Syntax of useEffect:
+useEffect(() => {} , [])
+           callback  ,  dependency array(optional) [a,b,c...]
+
+    CASE 1: when no array is passed 
+            useEffect will run on every re-render 
+    CASE 2: when empty array is passed 
+            useEffect will run only once when component is mounted
+    CASE 3: when dependency array is passed ,eg. [a,b,c]
+            useEffect will run on mounting phase as well as whenever any of a,b,c change (updating phase)
+            

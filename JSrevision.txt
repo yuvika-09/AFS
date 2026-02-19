@@ -26,3 +26,9 @@ log(a) -> it gives undefined cz if we dont initialize it, js assigns it as undef
 
 let nd const dont get memory in memory creation phase bcz it gets special memory location in TDZ 
 it comes out of TDZ when it is accessed during code execution
+
+
+
+
+
+callback
