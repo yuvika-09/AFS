@@ -137,3 +137,13 @@ useEffect(() => {} , [])
     CASE 3: when dependency array is passed ,eg. [a,b,c]
             useEffect will run on mounting phase as well as whenever any of a,b,c change (updating phase)
             
+
+AXIOS 
+
+LIFTING STATE UP 
+no method to send data directly from sibling to sibling 
+- to send data parent to child, use props 
+- to send data from child to parent, we use functions -> 
+    child(first sibling) send data to parent then parent send data to child(other sibling) -> sibling to sibling
+
+So, LIFTING STATE UP is used when we need to pass data from child to parent using a function
