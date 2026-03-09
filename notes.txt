@@ -147,3 +147,27 @@ no method to send data directly from sibling to sibling
     child(first sibling) send data to parent then parent send data to child(other sibling) -> sibling to sibling
 
 So, LIFTING STATE UP is used when we need to pass data from child to parent using a function
+
+
+
+ConextAPI and useContext
+***PROP DRILLING*** : process of passing data from a parent component to deeply nested child components 
+                      through multiple intermediate components
+
+        App → Parent → Child → GrandChild
+Only GrandChild actually needs data, but it is passed through Parent and Child.
+This unnecessary passing is called prop drilling.
+
+We use ContextAPI or useContext to remove the problem of prop drilling 
+
+In ContextAPI, we use a global memory(context)
+Provider provides value to the gloabl memory, nd other nested child components who need the value are the consumers
+
+steps:
+1. create context
+2. Provider
+3. read 
+
+Difference btw useContext/ContextAPI or Redux(state management library) ?
+ContextAPI/useContext doesnot protect or stop excessive or unnecessary re-rendering, only prop drilling 
+To stop re-rendering, use Redux toolkit
