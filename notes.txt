@@ -111,6 +111,9 @@ Features of React:
 
     RECONCILIATION -> meaning?
 
+- Single page application
+
+
 
 settimeout() nad setinterval() return id -> we dont want to show show id on page so store in useref
 useRef() return object with a single current property
@@ -171,3 +174,34 @@ steps:
 Difference btw useContext/ContextAPI or Redux(state management library) ?
 ContextAPI/useContext doesnot protect or stop excessive or unnecessary re-rendering, only prop drilling 
 To stop re-rendering, use Redux toolkit
+
+
+ROUTING 
+Routes for both frontend nd backend since req goes on frontend
+client-side routing : no built in method to create routing. so we use react-router-dom
+                        command -> npm i react-router-dom
+
+    to define route, we use 3 components from react-router-dom:
+    1. Route 
+        <Route path="/" element={<Home/>}<?Route>
+    2. Routes 
+        all Route written inside Routes component
+        <Routes>
+            <Route path="/" element={<Home/>}<?Route>
+        </Routes>
+    3. BrowserRouter 
+        All things used from react-router-dom written inside BrowserRouter
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>}<?Route>
+            </Routes>
+        </BrowserRouter>
+
+Dynamic routing in React means creating routes where part of the URL is variable, 
+and the component renders content based on that variable.
+This is usually done using React Router.
+    path="/about/:id" (dynamic parameter)
+    use useParams() to use the value from path 
+
+    {/* if user enters a route that is not defined, so define this * route */}
+    <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
