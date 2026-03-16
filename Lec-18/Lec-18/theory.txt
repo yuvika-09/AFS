@@ -1,0 +1,28 @@
+Difference between graphql and rest api
+1. GraphQl has single endpoint whereas rest api has multiple endpoints.
+2. Graphql works on server whereas rest api works on database..
+3. Graphql gives that data only which is required or requested by client through server response..
+4.REstFul api has problem of overfetching and underfetching which need more bandwidth.
+JARGON
+1.typeDefs : fields,obj,query,mutation must have type, similar to schema..
+UserEntity -> type User{
+    _id: ID,
+    name: String,
+    email: String,
+    phone: Int
+}
+Query should also have type and must be defined before use..
+ type query{
+    getUsers: [User]
+    getOneUser: User
+ }
+
+ 2.Resolvers: They are the function implementation of each query and mutation..
+ Eg.. getUsers:()=>{
+    //db call to data
+    return data;
+ }
+
+
+Only for fetching data => Query is used(similar to get request)
+add,delete,update => Mutation is used(for put,post,delete request)
