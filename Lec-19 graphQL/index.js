@@ -1,5 +1,7 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import jwt from "jsonwebtoken";
+let secretKey = "secret123";
 
 // Dummy Data
 let users = [
@@ -7,18 +9,21 @@ let users = [
     id: 1,
     name: "Yuvika",
     email: "yuvika@gmail.com",
+    password: "123",
     phone: 1234567890,
   },
   {
     id: 2,
     name: "abc",
     email: "abc.gmail.com",
+    password: "123",
     phone: 1234567890,
   },
   {
     id: 3,
     name: "xyz",
     email: "xyz.gmail.com",
+    password: "123",
     phone: 1234567890,
   },
 ];
@@ -50,11 +55,22 @@ let blogs = [
 // GraphQL Schema
 const typeDefs = `#graphql
 
+  type LoginResponse {
+    message: String
+    token: String
+  }
+
+  type addBlogResponse {
+    message: String
+    data: Blog
+  }
+
   type User {
     id: ID!
     name: String
     email: String
     phone: Int
+    password: String
     blogs: [Blog]
   }
 
@@ -79,9 +95,10 @@ const typeDefs = `#graphql
     deleteUser(id: ID!): [User]
     updateUser(id: ID!, name: String, email: String, phone: Int): User
 
-    addBlog(id: ID!, title: String, description: String, date: String, userID: ID!): [Blog]
+    addBlog(id: ID!, title: String, description: String, date: String, userID: ID!): addBlogResponse
     deleteBlog(id: ID!): [Blog]
     updateBlog(id: ID!, title: String, description: String, date: String): Blog
+    login(email: String, password: String): LoginResponse
   }
 
 `;
@@ -107,6 +124,31 @@ const resolvers = {
   },
 
   Mutation: {
+    login: (parent,args) => {
+      /**
+       * {email, pswd} = args
+       * if email exist?
+       *     No -> please register 
+       *     Yes 
+       *         check pswd
+       *               No -> wrong pswd 
+       *              Yes -> create token and return 
+       */
+      const { email, password } = args;
+      const user = users.find((u) => u.email == email);
+      if(!user) {
+        return {message : "Email does not exist", token : null};
+      }
+      if (user.password !== password) {
+        return {message : "Incorrect password", token : null};
+      }
+      let token = jwt.sign({ id: user.id}, secretKey);
+      return {
+        message : "Login successful",
+        token
+      };
+    },
+
     // User Mutations
     addUser: (_, args) => {
       const { id, name, email, phone } = args;
@@ -139,14 +181,21 @@ const resolvers = {
     },
 
     // Blog Mutations
-    addBlog: (_, args) => {
-  const { id, title, description, date, userID } = args;
-
-  const newBlog = { id, title, description, date, userID };
+    addBlog: (_, args,context) => {
+      let {userID} = context;
+      if(!userID) return {
+        message : context.message,
+        data : null
+      }
+  const { id, title, description, date} = args;
+  const newBlog = { id, title, description, date, userID};
 
   blogs.push(newBlog);
 
-  return blogs;
+  return {
+    message : "Blog added successfully",
+    data : blogs[blogs.length - 1]
+  };
 },
 
     deleteBlog: (_, args) => {
@@ -167,7 +216,7 @@ const resolvers = {
       blog.date = date;
 
       return blog;
-    },
+    }
   },
 
   User : {
@@ -191,7 +240,31 @@ const server = new ApolloServer({
 
 // Start Server
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: { port: 4000 }, 
+  context : ({req}) => {
+    let token = req.headers.authorization;
+    if(!token) {
+      return {
+        message: "user not logged in",
+        userID: null
+      };
+    }
+    try {
+      let decode = jwt.verify(token, secretKey); 
+      if(!decode) return {message: "Invalid token", userID: null};
+      return {
+        message: "user logged in",
+        userID: decode.id
+      };
+    }
+    catch(error) {
+      console.log(error.message);
+      return {
+        message : "internal server error",
+        userID: null
+      }
+    }
+  }
 });
 
 console.log(`Server ready at: ${url}`);
