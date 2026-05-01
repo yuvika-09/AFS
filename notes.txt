@@ -164,7 +164,7 @@ This unnecessary passing is called prop drilling.
 We use ContextAPI or useContext to remove the problem of prop drilling 
 
 In ContextAPI, we use a global memory(context)
-Provider provides value to the gloabl memory, nd other nested child components who need the value are the consumers
+Provider provides value to the global memory, nd other nested child components who need the value are the consumers
 
 steps:
 1. create context

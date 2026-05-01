@@ -223,7 +223,7 @@ const resolvers = {
     blogs : (parent, args) => {
     // parent gets the return value of parent resolver
     return blogs.filter((b) => b.userID == parent.id);
-  }
+  }6+
 },
 Blog: {
   user: (parent) => {
