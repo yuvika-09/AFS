@@ -208,3 +208,11 @@ This is usually done using React Router.
 
 
 
+
+FIREBASE functions:
+createUserWithEmailAndPassword  -> create user with email nd password 
+signInWithEmailAndPassword  -> login user with email nd password 
+signInWithPopUp -> login using provider(google, facebook, github etc.)
+
+OnAuthStateChange -> observer function to continuously monitor auth change
+auth.currentUser -> shows current user
