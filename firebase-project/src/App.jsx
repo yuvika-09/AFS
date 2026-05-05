@@ -4,6 +4,15 @@ import { auth } from "./firebase";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 function App() {
+  let [user, SetUser] = useState(null);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      SetUser(currentUser);
+    });
+
+    return () => unsubscribe(); //when function unmounts(clean up function)
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
